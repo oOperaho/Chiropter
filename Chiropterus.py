@@ -9,11 +9,18 @@ class TextEditor(QWidget):
 
 	def __init__(self):
 		QWidget.__init__(self)
-		self.setGeometry(100, 100, 300, 400)
+		self.setGeometry(300, 300, 500, 500)
+		self.setMinimumSize(200, 200)
 		self.setObjectName(objects[0])
 		self.current_path = None
-		self.txt_field = QPlainTextEdit(self)
-		self.txt_field.setObjectName(objects[1])
+		self.mainui()
+
+	def mainui(self):
+		self.layout = QVBoxLayout(self)
+		self.txt_editor = QPlainTextEdit(self)
+
+		self.layout.addWidget(self.txt_editor)
+		self.layout.setObjectName(objects[1])
 
 
 
