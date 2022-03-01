@@ -7,4 +7,10 @@ QPlainTextEdit#LineEdit
 {
 	background-color: #323835;
 	color: #DADADA;
+	border: 1px solid black;
+}
+
+QVBoxLayout#Box
+{
+	background-color: #323835;
 }
