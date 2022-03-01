@@ -1,0 +1,10 @@
+QWidget#Menu
+{
+	background-color: #323835;
+}
+
+QPlainTextEdit#TxtLayout
+{
+	background-color: #323835;
+	color: white;
+}
