@@ -3,8 +3,8 @@ QWidget#Menu
 	background-color: #323835;
 }
 
-QVBoxLayout#TxtLayout
+QPlainTextEdit#LineEdit
 {
 	background-color: #323835;
-	color: white;
+	color: #DADADA;
 }
