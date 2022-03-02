@@ -11,7 +11,7 @@ class TextEditor(QMainWindow):
 		self.resize(500, 500)
 		self.setObjectName(objects[0])
 		self.txt_editor = QPlainTextEdit(self)
-		self.txt_layout = QVBoxLayout(self)
+		self.txt_layout = QGridLayout(self)
 		self.txt_widget = QWidget(self)
 		self.txtField()
 		self._createMenuBar()
@@ -29,7 +29,7 @@ class TextEditor(QMainWindow):
 		self.txt_editor.setObjectName(objects[1])
 		self.txt_editor.setGeometry(100, 100, 100, 100)
 		self.txt_layout.setObjectName(objects[2])
-		self.txt_layout.addWidget(self.txt_editor)
+		
 		self.txt_widget.setLayout(self.txt_layout)
 
 

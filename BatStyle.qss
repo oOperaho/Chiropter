@@ -10,7 +10,7 @@ QPlainTextEdit#LineEdit
 	border: 1px solid black;
 }
 
-QVBoxLayout#Box
+QVGridLayout#Box
 {
 	background-color: #323835;
 }
