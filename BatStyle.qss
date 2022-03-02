@@ -10,13 +10,14 @@ QPlainTextEdit#LineEdit
 	border: 1px solid black;
 }
 
-QVGridLayout#Box
+QVBoxLayout#Box
 {
 	background-color: #323835;
 }
 
 QMenuBar#MenuBar
 {
-	background-color: #323835;
+	background-color: #313232;
 	color: white;
+	border: 2px white;
 }
