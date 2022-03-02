@@ -3,24 +3,23 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
-objects = ["Menu", "LineEdit", "Box"]
+objects = ["Menu", "LineEdit", "Box", "MenuBar"]
 
-class TextEditor(QWidget):
-
-	def __init__(self):
-		QWidget.__init__(self)
-		self.setGeometry(300, 300, 500, 500)
-		self.setMinimumSize(200, 200)
+class TextEditor(QMainWindow):
+	def __init__(self, parent=None):
+		super().__init__(parent)
+		self.resize(500, 500)
 		self.setObjectName(objects[0])
-		self.txt_editor = QPlainTextEdit(self)
-		self.layout = QVBoxLayout(self)
-		self.current_path = None
-		self.mainui()
+		self._createMenuBar()
 
-	def mainui(self):
-		self.txt_editor.setObjectName(objects[1])
-		self.layout.setObjectName(objects[2])
-		self.layout.addWidget(self.txt_editor)
+
+	def _createMenuBar(self):
+		self.menu = QMenuBar(self)
+		self.setMenuBar(self.menu)
+		self.menu.addMenu("&File")
+		self.menu.addMenu("&Edit")
+		self.menu.addMenu("&Style")
+		self.menu.setObjectName(objects[3])
 
 
 

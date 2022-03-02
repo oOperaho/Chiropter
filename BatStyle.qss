@@ -1,4 +1,4 @@
-QWidget#Menu
+QMainWindow#Menu
 {
 	background-color: black;
 }
@@ -13,4 +13,10 @@ QPlainTextEdit#LineEdit
 QVBoxLayout#Box
 {
 	background-color: #323835;
+}
+
+QMenuBar#MenuBar
+{
+	background-color: #323835;
+	color: white;
 }
