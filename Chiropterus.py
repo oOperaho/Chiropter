@@ -11,15 +11,15 @@ class TextEditor(QMainWindow):
 		self.resize(500, 500)
 		self.setObjectName(objects[0])
 		self.txt_editor = QPlainTextEdit(self)
-		self.txt_layout = QGridLayout(self)
-		self.txt_widget = QWidget(self)
+
+		self.menu = QMenuBar(self)
+		self.setMenuBar(self.menu)
+		#self.txt_widget = QWidget(self)
 		self.txtField()
 		self._createMenuBar()
 
 
 	def _createMenuBar(self):
-		self.menu = QMenuBar(self)
-		self.setMenuBar(self.menu)
 		self.menu.addMenu("&File")
 		self.menu.addMenu("&Edit")
 		self.menu.addMenu("&Style")
@@ -27,10 +27,9 @@ class TextEditor(QMainWindow):
 
 	def txtField(self):
 		self.txt_editor.setObjectName(objects[1])
-		self.txt_editor.setGeometry(100, 100, 100, 100)
-		self.txt_layout.setObjectName(objects[2])
-		
-		self.txt_widget.setLayout(self.txt_layout)
+		self.txt_editor.resize(self.frameGeometry().height(), self.frameGeometry().width())
+		#self.txt_editor.move()
+		#self.txt_widget.setLayout(self.txt_layout)
 
 
 def display():
@@ -44,7 +43,7 @@ def display():
 	w.setStyle("Breeze")
 	ui = TextEditor()
 	ui.show()
-	sys.exit(w.exec())
+	w.exec()
 
 
 display()
