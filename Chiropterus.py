@@ -26,9 +26,8 @@ class TextEditor(QMainWindow):
 
 	def txtField(self):
 		self.txt_editor.setObjectName(objects[1])
-		self.txt_layout.setObjectName(objects[2])
-		self.txt_layout.addWidget(self.txt_editor)
-
+		#self.txt_layout.setObjectName(objects[2])
+		#self.txt_layout.addWidget(self.txt_editor)
 
 
 def display():
