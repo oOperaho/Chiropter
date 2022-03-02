@@ -10,6 +10,9 @@ class TextEditor(QMainWindow):
 		super().__init__(parent)
 		self.resize(500, 500)
 		self.setObjectName(objects[0])
+		self.txt_editor = QPlainTextEdit(self)
+		self.txt_layout = QVBoxLayout(self)
+		self.txtField()
 		self._createMenuBar()
 
 
@@ -20,6 +23,11 @@ class TextEditor(QMainWindow):
 		self.menu.addMenu("&Edit")
 		self.menu.addMenu("&Style")
 		self.menu.setObjectName(objects[3])
+
+	def txtField(self):
+		self.txt_editor.setObjectName(objects[1])
+		self.txt_layout.setObjectName(objects[2])
+		self.txtlayout.addWidget(self.txteditor)
 
 
 
