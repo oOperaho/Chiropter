@@ -1,6 +1,6 @@
 QWidget#Menu
 {
-	background-color: #323835;
+	background-color: black;
 }
 
 QPlainTextEdit#LineEdit
