@@ -29,17 +29,13 @@ class TextEditor(QMainWindow):
 		self.menu.setObjectName(objects[3])
 
 		#  File button setting
-		self.new_file = QAction("&New", self)
-		self.file.addAction(self.new_file)
-		self.open_file = QAction("&Open")
-		self.file.addAction(self.open_file)
-		self.save_file = QAction("&Save", self)
-		self.file.addAction(self.save_file)
-		self.quit = QAction("&Quit", self)
-		self.file.addAction(self.quit)
+		self.file.addAction(QAction("&New", self))
+		self.file.addAction(QAction("&Open", self))
+		self.file.addAction(QAction("&Save", self))
+		self.file.addAction(QAction("&Quit", self))
 
-
-
+		#  Edit button setting
+		self.edit.addAction(QAction("&Copy", self))
 
 
 	def txtField(self):
