@@ -1,4 +1,5 @@
 import sys
+import os
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
@@ -7,6 +8,7 @@ objects = ["Menu", "LineEdit", "Box", "MenuBar"]
 
 
 class TextEditor(QMainWindow):
+
 	def __init__(self, parent=None):
 		super().__init__(parent)
 		self.resize(500, 500)
@@ -33,6 +35,7 @@ class TextEditor(QMainWindow):
 		#  File button setting
 		self.new_file = QAction("&New", self)
 		self.open_file = QAction("&Open", self)
+		self.open_file.setShortcut("Ctrl+O")
 		self.save_file = QAction("&Save", self)
 		self.quit = QAction("&Quit", self)
 		self.file.addAction(self.new_file)
@@ -50,7 +53,7 @@ class TextEditor(QMainWindow):
 		self.style.addAction(QAction("&BatStyle", self))
 		self.style.addAction(QAction("&Photony", self))
 
-	def Actions(Self):
+	def Actions(self):
 		self.new_file.triggered.connect(self.newFile)
 		self.open_file.triggered.connect(self.openFile)
 		self.save_file.triggered.connect(self.saveFile)
@@ -60,7 +63,8 @@ class TextEditor(QMainWindow):
 		pass
 
 	def openFile(self):
-		pass
+		self.pulled_file = QFileDialog.getOpenFileName(self, "Search Your File")
+		
 
 	def saveFile(self):
 		pass
