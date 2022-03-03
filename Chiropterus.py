@@ -36,6 +36,10 @@ class TextEditor(QMainWindow):
 
 		#  Edit button setting
 		self.edit.addAction(QAction("&Copy", self))
+		self.edit.addAction(QAction("&Paste", self))
+		self.edit.addAction(QAction("&Cut", self))
+
+		
 
 
 	def txtField(self):
