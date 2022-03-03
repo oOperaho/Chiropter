@@ -29,17 +29,19 @@ class TextEditor(QMainWindow):
 		self.menu.setObjectName(objects[3])
 
 		#  File button setting
-		self.file.addAction(QAction("&New", self))
-		self.file.addAction(QAction("&Open", self))
-		self.file.addAction(QAction("&Save", self))
-		self.file.addAction(QAction("&Quit", self))
+		self.file.addAction(QAction("&New   Ctrl+N", self))
+		self.file.addAction(QAction("&Open   Ctrl+N", self))
+		self.file.addAction(QAction("&Save   Ctrl+N", self))
+		self.file.addAction(QAction("&Quit   Ctrl+N", self))
 
 		#  Edit button setting
 		self.edit.addAction(QAction("&Copy", self))
 		self.edit.addAction(QAction("&Paste", self))
 		self.edit.addAction(QAction("&Cut", self))
 
-		
+		#  Style button setting
+		self.style.addAction(QAction("&BatStyle", self))
+		self.style.addAction(QAction("&Photony", self))
 
 
 	def txtField(self):
