@@ -3,7 +3,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
-objects = ["Menu", "LineEdit", "Box", "MenuBar"]
+objects = ["Menu", "LineEdit", "Box", "MenuBar", "SubMenu"]
 
 
 class TextEditor(QMainWindow):
@@ -14,17 +14,31 @@ class TextEditor(QMainWindow):
 		self.txt_editor = QPlainTextEdit(self)
 		self.txt_layout = QVBoxLayout(self)
 		self.txt_widget = QWidget(self)
-		self.open_file = QAction("&New", self)
 		self.menu = QMenuBar(self)
 		self.setMenuBar(self.menu)
 		self.txtField()
 		self.MenuBar()
 
 	def MenuBar(self):
-		self.menu.addMenu("&File")
-		self.menu.addMenu("&Edit")
-		self.menu.addMenu("&Style")
+		self.file = QMenu("&File", self)
+		self.edit = QMenu("&Edit", self)
+		self.style = QMenu("&Style", self)
+		self.menu.addMenu(self.file)
+		self.menu.addMenu(self.edit)
+		self.menu.addMenu(self.style)
 		self.menu.setObjectName(objects[3])
+
+		#  File button setting
+		self.new_file = QAction("&New", self)
+		self.file.addAction(self.new_file)
+		self.open_file = QAction("&Open")
+		self.file.addAction(self.open_file)
+		self.save_file = QAction("&Save", self)
+		self.file.addAction(self.save_file)
+		self.quit = QAction("&Quit", self)
+		self.file.addAction(self.quit)
+
+
 
 
 
