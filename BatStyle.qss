@@ -18,11 +18,9 @@ QVBoxLayout#Box
 QMenuBar#MenuBar
 {
 	background-color: #313232;
-	color: white;
-	border: 2px white;
 }
 
-QAction#SubMenu
+QMenu:item
 {
-	background-color: #313232;
+	background-color: white;
 }
