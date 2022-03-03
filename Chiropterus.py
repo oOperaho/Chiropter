@@ -3,7 +3,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
-objects = ["Menu", "LineEdit", "Box", "MenuBar", "SubMenu"]
+objects = ["Menu", "LineEdit", "Box", "MenuBar"]
 
 
 class TextEditor(QMainWindow):

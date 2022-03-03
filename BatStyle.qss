@@ -18,9 +18,5 @@ QVBoxLayout#Box
 QMenuBar#MenuBar
 {
 	background-color: #313232;
-}
-
-QMenu:item
-{
-	background-color: white;
+	color: white;
 }
