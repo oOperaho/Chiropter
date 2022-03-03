@@ -16,8 +16,9 @@ class TextEditor(QMainWindow):
 		self.txt_widget = QWidget(self)
 		self.menu = QMenuBar(self)
 		self.setMenuBar(self.menu)
-		self.txtField()
 		self.MenuBar()
+		self.txtField()
+		#self.rightclick()
 
 	def MenuBar(self):
 		self.file = QMenu("&File", self)
@@ -32,6 +33,7 @@ class TextEditor(QMainWindow):
 		self.file.addAction(QAction("&New   Ctrl+N", self))
 		self.file.addAction(QAction("&Open   Ctrl+N", self))
 		self.file.addAction(QAction("&Save   Ctrl+N", self))
+		self.file.addSeparator()
 		self.file.addAction(QAction("&Quit   Ctrl+N", self))
 
 		#  Edit button setting
@@ -50,7 +52,13 @@ class TextEditor(QMainWindow):
 		self.txt_layout.addWidget(self.txt_editor)
 		self.txt_widget.setLayout(self.txt_layout)
 		self.setCentralWidget(self.txt_widget)
-		
+
+	#def rightclick(self):
+		#self.txt_widget.setContextMenuPolicy(Qt.ActionsContextMenu)
+		#self.txt_widget.addAction(QAction("&Copy", self))
+		#self.txt_widget.addAction(QAction("&Paste", self))
+		#self.txt_widget.addAction(QAction("&Cut", self))
+
 
 def display():
 	import sys
