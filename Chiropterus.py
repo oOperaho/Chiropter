@@ -17,8 +17,9 @@ class TextEditor(QMainWindow):
 		self.menu = QMenuBar(self)
 		self.setMenuBar(self.menu)
 		self.MenuBar()
-		self.txtField()
-		#self.rightclick()
+		self.Actions()
+		self.TxtField()
+		self.Rightclick()
 
 	def MenuBar(self):
 		self.file = QMenu("&File", self)
@@ -30,11 +31,15 @@ class TextEditor(QMainWindow):
 		self.menu.setObjectName(objects[3])
 
 		#  File button setting
-		self.file.addAction(QAction("&New   Ctrl+N", self))
-		self.file.addAction(QAction("&Open   Ctrl+N", self))
-		self.file.addAction(QAction("&Save   Ctrl+N", self))
+		self.new_file = QAction("&New", self)
+		self.open_file = QAction("&Open", self)
+		self.save_file = QAction("&Save", self)
+		self.quit = QAction("&Quit", self)
+		self.file.addAction(self.new_file)
+		self.file.addAction(self.open_file)
+		self.file.addAction(self.save_file)
 		self.file.addSeparator()
-		self.file.addAction(QAction("&Quit   Ctrl+N", self))
+		self.file.addAction(self.quit)
 
 		#  Edit button setting
 		self.edit.addAction(QAction("&Copy", self))
@@ -45,19 +50,37 @@ class TextEditor(QMainWindow):
 		self.style.addAction(QAction("&BatStyle", self))
 		self.style.addAction(QAction("&Photony", self))
 
+	def Actions(Self):
+		self.new_file.triggered.connect(self.newFile)
+		self.open_file.triggered.connect(self.openFile)
+		self.save_file.triggered.connect(self.saveFile)
+		self.quit.triggered.connect(self.quitEditor)
 
-	def txtField(self):
+	def newFile(self):
+		pass
+
+	def openFile(self):
+		pass
+
+	def saveFile(self):
+		pass
+
+	def quitEditor(self):
+		pass
+
+
+	def TxtField(self):
 		self.txt_editor.setObjectName(objects[1])
 		self.txt_layout.setObjectName(objects[2])
 		self.txt_layout.addWidget(self.txt_editor)
 		self.txt_widget.setLayout(self.txt_layout)
 		self.setCentralWidget(self.txt_widget)
 
-	#def rightclick(self):
-		#self.txt_widget.setContextMenuPolicy(Qt.ActionsContextMenu)
-		#self.txt_widget.addAction(QAction("&Copy", self))
-		#self.txt_widget.addAction(QAction("&Paste", self))
-		#self.txt_widget.addAction(QAction("&Cut", self))
+	def Rightclick(self):
+		self.txt_editor.setContextMenuPolicy(Qt.ActionsContextMenu)
+		self.txt_editor.addAction(QAction("&Copy", self))
+		self.txt_editor.addAction(QAction("&Paste", self))
+		self.txt_editor.addAction(QAction("&Cut", self))
 
 
 def display():
