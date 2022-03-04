@@ -34,9 +34,11 @@ class TextEditor(QMainWindow):
 
 		#  File button setting
 		self.new_file = QAction("&New", self)
+		self.new_file.setShortcut("Ctrl+N")
 		self.open_file = QAction("&Open", self)
 		self.open_file.setShortcut("Ctrl+O")
 		self.save_file = QAction("&Save", self)
+		self.save_file.setShortcut("Ctrl+S")
 		self.quit = QAction("&Quit", self)
 		self.file.addAction(self.new_file)
 		self.file.addAction(self.open_file)
@@ -64,14 +66,20 @@ class TextEditor(QMainWindow):
 
 	def openFile(self):
 		self.pulled_file = QFileDialog.getOpenFileName(self, "Search Your File")
-		
+		self.pulled_file_text = open(self.pulled_file[0]).read()
+		print(self.pulled_file)
+		self.txt_editor.setPlainText(self.pulled_file_text)
+		self.setWindowTitle(self.pulled_file[0] + " | Chiropter")
 
 	def saveFile(self):
 		pass
 
 	def quitEditor(self):
-		pass
-
+		self.quitask = QMessageBox.question(self, "Leaving?", "Do you want to quit?", QMessageBox.Yes | QMessageBox.No)
+		if self.quitask == QMessageBox.Yes:
+			sys.exit()
+		else:
+			pass
 
 	def TxtField(self):
 		self.txt_editor.setObjectName(objects[1])
