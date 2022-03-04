@@ -40,6 +40,7 @@ class TextEditor(QMainWindow):
 		self.save_file = QAction("&Save", self)
 		self.save_file.setShortcut("Ctrl+S")
 		self.quit = QAction("&Quit", self)
+		self.quit.setShortcut("Ctrl+Q")
 		self.file.addAction(self.new_file)
 		self.file.addAction(self.open_file)
 		self.file.addAction(self.save_file)
