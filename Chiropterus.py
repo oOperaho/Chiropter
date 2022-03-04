@@ -113,7 +113,7 @@ def display():
 	import sys
 	w = QApplication(sys.argv)
 	w.setApplicationName("Chiropter")
-	BatStyle = open("BatStyle.qss", "r")
+	BatStyle = open("Styles/BatStyle.qss", "r")
 	with BatStyle:
 		qss = BatStyle.read()
 		w.setStyleSheet(qss)
