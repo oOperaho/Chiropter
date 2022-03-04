@@ -48,19 +48,30 @@ class TextEditor(QMainWindow):
 		self.file.addAction(self.quit)
 
 		#  Edit button setting
-		self.edit.addAction(QAction("&Copy", self))
-		self.edit.addAction(QAction("&Paste", self))
-		self.edit.addAction(QAction("&Cut", self))
+		self.copy_text = QAction("&Copy", self)
+		self.copy_text.setShortcut("Ctrl+C")
+		self.paste_text = QAction("&Paste", self)
+		self.paste_text.setShortcut("Ctrl+V")
+		self.cut_text = QAction("&Cut", self)
+		self.cut_text.setShortcut("Ctrl+X")
+		self.edit.addAction(self.copy_text)
+		self.edit.addAction(self.paste_text)
+		self.edit.addAction(self.cut_text)
 
 		#  Style button setting
 		self.style.addAction(QAction("&BatStyle", self))
 		self.style.addAction(QAction("&Photony", self))
 
 	def Actions(self):
+		#  File menu actions
 		self.new_file.triggered.connect(self.newFile)
 		self.open_file.triggered.connect(self.openFile)
 		self.save_file.triggered.connect(self.saveFile)
 		self.quit.triggered.connect(self.quitEditor)
+
+		#  Edit menu actions
+		self.copy_text.triggered.connect(self.txt_editor.copy)
+		self.paste_text.triggered.connect(self.txt_editor.paste)
 
 	def newFile(self):
 		pass
@@ -83,7 +94,7 @@ class TextEditor(QMainWindow):
 			pass
 		else:
 			self.saving_file = open(self.ready_file[0], "w")
-			self.saved_file = self.txt_editor.textEdit.toPlainText()
+			#self.saved_file = 
 			self.saving_file.write(self.saved_file)
 			self.saving_file.close()
 
