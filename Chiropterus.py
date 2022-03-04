@@ -68,7 +68,6 @@ class TextEditor(QMainWindow):
 	def openFile(self):
 		self.pulled_file = QFileDialog.getOpenFileName(self, "Search Your File")
 		self.pulled_file_text = open(self.pulled_file[0]).read()
-		print(self.pulled_file)
 		self.txt_editor.setPlainText(self.pulled_file_text)
 		self.setWindowTitle(self.pulled_file[0] + " | Chiropter")
 
