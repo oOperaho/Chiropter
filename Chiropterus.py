@@ -72,6 +72,7 @@ class TextEditor(QMainWindow):
 		#  Edit menu actions
 		self.copy_text.triggered.connect(self.txt_editor.copy)
 		self.paste_text.triggered.connect(self.txt_editor.paste)
+		self.cut_text.triggered.connect(self.txt_editor.cut)
 
 	def newFile(self):
 		pass
@@ -114,10 +115,18 @@ class TextEditor(QMainWindow):
 		self.setCentralWidget(self.txt_widget)
 
 	def Rightclick(self):
+		#  Right click menu
 		self.txt_editor.setContextMenuPolicy(Qt.ActionsContextMenu)
-		self.txt_editor.addAction(QAction("&Copy", self))
-		self.txt_editor.addAction(QAction("&Paste", self))
-		self.txt_editor.addAction(QAction("&Cut", self))
+		self.copy_text = QAction("&Copy", self)
+		self.txt_editor.addAction(self.copy_text)
+		self.paste_text = QAction("&Paste", self)
+		self.txt_editor.addAction(self.paste_text)
+		self.cut_text = QAction("&Cut", self)
+		self.txt_editor.addAction(self.cut_text)
+		self.copy_text.triggered.connect(self.txt_editor.copy)
+		self.paste_text.triggered.connect(self.txt_editor.paste)
+		self.cut_text.triggered.connect(self.txt_editor.cut)
+		
 
 
 def display():
