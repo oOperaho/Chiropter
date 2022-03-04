@@ -73,7 +73,8 @@ class TextEditor(QMainWindow):
 		self.setWindowTitle(self.filename.fileName() + " | Chiropter")
 
 	def saveFile(self):
-		pass
+		self.ready_file = QFileDialog.setSaveFileName(self, "Save Four File")
+		
 
 	def quitEditor(self):
 		self.quitask = QMessageBox.question(self, "Leaving?", "Do you want to quit?", QMessageBox.Yes | QMessageBox.No)
