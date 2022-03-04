@@ -75,7 +75,7 @@ class TextEditor(QMainWindow):
 		#  File menu actions
 		self.new_file.triggered.connect(self.newFile)
 		self.open_file.triggered.connect(self.openFile)
-		self.save_file.triggered.connect(self.saveFile)
+		self.save_file.triggered.connect(self.saveFileas)
 		self.quit.triggered.connect(self.quitEditor)
 
 		#  Edit menu actions
@@ -100,15 +100,14 @@ class TextEditor(QMainWindow):
 			self.txt_editor.setPlainText(self.pulled_file_text)
 			self.setWindowTitle(self.filename.fileName() + " | Chiropter")
 
-	def saveFile(self):
+	def saveFileas(self):
 		self.ready_file = QFileDialog.getSaveFileName(self, "Save Four File", "yourfile.txt")
 
 		if self.ready_file[0] == "":
 			pass
 		else:
 			self.saving_file = open(self.ready_file[0], "w")
-			#self.saved_file = 
-			self.saving_file.write(self.saved_file)
+			self.saving_file.write(self.saving_file)
 			self.saving_file.close()
 
 
