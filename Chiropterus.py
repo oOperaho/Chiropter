@@ -67,17 +67,25 @@ class TextEditor(QMainWindow):
 
 	def openFile(self):
 		self.pulled_file = QFileDialog.getOpenFileName(self, "Search Your File")
-		self.pulled_file_text = open(self.pulled_file[0]).read()
-		self.filename = QUrl.fromLocalFile(self.pulled_file[0])
-		self.txt_editor.setPlainText(self.pulled_file_text)
-		self.setWindowTitle(self.filename.fileName() + " | Chiropter")
+
+		if self.pulled_file[0] == "":
+			pass
+		else:
+			self.pulled_file_text = open(self.pulled_file[0]).read()
+			self.filename = QUrl.fromLocalFile(self.pulled_file[0])
+			self.txt_editor.setPlainText(self.pulled_file_text)
+			self.setWindowTitle(self.filename.fileName() + " | Chiropter")
 
 	def saveFile(self):
 		self.ready_file = QFileDialog.getSaveFileName(self, "Save Four File", "yourfile.txt")
-		self.saving_file = open(self.ready_file[0], "w")
-		self.saved_file = self.txt_editor.textEdit.toPlainText()
-		self.saving_file.write(self.saved_file)
-		self.saving_file.close()
+
+		if self.ready_file[0] == "":
+			pass
+		else:
+			self.saving_file = open(self.ready_file[0], "w")
+			self.saved_file = self.txt_editor.textEdit.toPlainText()
+			self.saving_file.write(self.saved_file)
+			self.saving_file.close()
 
 
 	def quitEditor(self):
