@@ -54,9 +54,15 @@ class TextEditor(QMainWindow):
 		self.paste_text.setShortcut("Ctrl+V")
 		self.cut_text = QAction("&Cut", self)
 		self.cut_text.setShortcut("Ctrl+X")
+		self.undo_text = QAction("&Undo", self)
+		self.undo_text.setShortcut("Ctrl+Z")
+		self.redo_text = QAction("&Redo", self)
+		self.redo_text.setShortcut("Ctrl+B")
 		self.edit.addAction(self.copy_text)
 		self.edit.addAction(self.paste_text)
 		self.edit.addAction(self.cut_text)
+		self.edit.addAction(self.undo_text)
+		self.edit.addAction(self.redo_text)
 
 		#  Style button setting
 		self.style.addAction(QAction("&BatStyle", self))
@@ -73,6 +79,9 @@ class TextEditor(QMainWindow):
 		self.copy_text.triggered.connect(self.txt_editor.copy)
 		self.paste_text.triggered.connect(self.txt_editor.paste)
 		self.cut_text.triggered.connect(self.txt_editor.cut)
+		self.undo_text.triggered.connect(self.txt_editor.undo)
+		self.redo_text.triggered.connect(self.txt_editor.redo
+			)
 
 	def newFile(self):
 		pass
@@ -123,9 +132,15 @@ class TextEditor(QMainWindow):
 		self.txt_editor.addAction(self.paste_text)
 		self.cut_text = QAction("&Cut", self)
 		self.txt_editor.addAction(self.cut_text)
+		self.undo_text = QAction("&Undo", self)
+		self.txt_editor.addAction(self.undo_text)
+		self.redo_text = QAction("&Redo", self)
+		self.txt_editor.addAction(self.redo_text)
 		self.copy_text.triggered.connect(self.txt_editor.copy)
 		self.paste_text.triggered.connect(self.txt_editor.paste)
 		self.cut_text.triggered.connect(self.txt_editor.cut)
+		self.undo_text.triggered.connect(self.txt_editor.undo)
+		self.redo_text.triggered.connect(self.txt_editor.redo)
 		
 
 
