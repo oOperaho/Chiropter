@@ -104,19 +104,22 @@ class TextEditor(QMainWindow):
 		self.create_new = QMessageBox()
 		self.create_new.setWindowTitle("Create new file")
 		self.create_new.setText("\nHow do you want to create a new file?")
-		self.buttons = self.create_new.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-		self.okButton = self.create_new.button(QMessageBox.Ok)
-		self.okButton.setText("Save and open new file")
+		self.buttons = self.create_new.setStandardButtons(QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
+		self.yesButton = self.create_new.button(QMessageBox.Yes)
+		self.yesButton.setText("Save and open new file")
+		self.noButton = self.create_new.button(QMessageBox.No)
+		self.noButton.setText("Just open a new file")
 		self.cancelButton = self.create_new.button(QMessageBox.Cancel)
-		self.cancelButton.setText("Just open new file")
 		self.create_new.exec_()
-		if self.create_new.clickedButton() == self.okButton:
-			with open("NewFile.txt", "w") as f:
-				f.write("")
+		if self.create_new.clickedButton() == self.yesButton:
 			self.saveFile()
-		else:
+
+
+		elif self.create_new.clickedButton() == self.noButton:
 			with open("Unknown.txt", "w") as f:
 				f.write("")
+		else:
+			pass
 
 	def openFile(self):
 		self.alert_box = QMessageBox.question(self, "Open file", "\nThe current changes will be overwrited. \nMake sure you saved the file.", QMessageBox.Ok | QMessageBox.Cancel)
@@ -144,7 +147,7 @@ class TextEditor(QMainWindow):
 
 
 	def saveFileas(self):
-		self.pulled_file, _ = QFileDialog.getSaveFileName(self, "Save Four File", "File.txt")
+		self.pulled_file, _ = QFileDialog.getSaveFileName(self, "Save Your File", "File.txt")
 
 		if self.pulled_file == "":
 			pass
