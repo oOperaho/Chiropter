@@ -112,9 +112,8 @@ class TextEditor(QMainWindow):
 		self.cancelButton = self.create_new.button(QMessageBox.Cancel)
 		self.create_new.exec_()
 		if self.create_new.clickedButton() == self.yesButton:
-			self.saveFile()
-			self.txt_editor.setPlainText("")
-			self.changeWindowTitle()
+			pass
+
 
 		elif self.create_new.clickedButton() == self.noButton:
 			self.txt_editor.setPlainText("")
