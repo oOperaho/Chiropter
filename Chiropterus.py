@@ -27,7 +27,7 @@ class TextEditor(QMainWindow):
 	def MenuBar(self):
 		self.file = QMenu("&File", self)
 		self.edit = QMenu("&Edit", self)
-		self.style = QMenu("&Style", self)
+		self.style = QMenu("&Styles", self)
 		self.menu.addMenu(self.file)
 		self.menu.addMenu(self.edit)
 		self.menu.addMenu(self.style)
@@ -118,7 +118,6 @@ class TextEditor(QMainWindow):
 
 		elif self.create_new.clickedButton() == self.noButton:
 			self.txt_editor.setPlainText("")
-			print(self.pulled_file)
 			self.changeWindowTitle()
 		else:
 			pass
