@@ -74,6 +74,7 @@ class TextEditor(QMainWindow):
 		#  Style button setting
 		self.style.addAction(QAction("&BatStyle", self))
 		self.style.addAction(QAction("&Photony", self))
+		self.style.addAction(QAction("&Afterbreeze", self))
 
 
 	def TxtField(self):
@@ -100,7 +101,11 @@ class TextEditor(QMainWindow):
 		self.select_text.triggered.connect(self.txt_editor.selectAll)
 
 	def newFile(self):
-		pass
+		self.create_new = QMessageBox.question(self, "Create new file", "Save current file?", QMessageBox.Yes | QMessageBox.No)
+		if self.create_new == QMessageBox.Yes:
+			return self.saveFile()
+		else:
+			self.txt_editor.setPlainText("")
 
 	def openFile(self):
 		self.pulled_file = QFileDialog.getOpenFileName(self, "Search Your File", ".", "Text Docs (*.txt);All files (*.*)")
