@@ -75,6 +75,14 @@ class TextEditor(QMainWindow):
 		self.style.addAction(QAction("&BatStyle", self))
 		self.style.addAction(QAction("&Photony", self))
 
+
+	def TxtField(self):
+		self.txt_editor.setObjectName(objects[1])
+		self.txt_layout.setObjectName(objects[2])
+		self.txt_layout.addWidget(self.txt_editor)
+		self.txt_widget.setLayout(self.txt_layout)
+		self.setCentralWidget(self.txt_widget)
+
 	def Actions(self):
 		#  File menu actions
 		self.new_file.triggered.connect(self.newFile)
@@ -118,6 +126,7 @@ class TextEditor(QMainWindow):
 				with open(self.pulled_file[0], "w") as f:
 					f.write(self.currently_writing)
 			except Exception as e:
+				#  Change this to QMessageBox
 				print(str(e))
 
 
@@ -127,9 +136,12 @@ class TextEditor(QMainWindow):
 		if self.ready_file[0] == "":
 			pass
 		else:
-			self.saving_file = open(self.ready_file[0], "w")
-			self.saving_file.write(self.saving_file)
-			self.saving_file.close()
+			try:
+				self.saving_file = open(self.ready_file[0], "w")
+				self.saving_file.write(self.saving_file)
+			except:
+				#  Change this to QMessageBox
+				print(str(e))
 
 
 	def quitEditor(self):
@@ -138,13 +150,6 @@ class TextEditor(QMainWindow):
 			sys.exit()
 		else:
 			pass
-
-	def TxtField(self):
-		self.txt_editor.setObjectName(objects[1])
-		self.txt_layout.setObjectName(objects[2])
-		self.txt_layout.addWidget(self.txt_editor)
-		self.txt_widget.setLayout(self.txt_layout)
-		self.setCentralWidget(self.txt_widget)
 
 	def Rightclick(self):
 		#  Right click menu
