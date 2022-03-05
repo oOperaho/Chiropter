@@ -113,7 +113,12 @@ class TextEditor(QMainWindow):
 		if self.pulled_file is None:
 			return self.saveFileas()
 		else:
-			self.currently_writing = self.txt_editor.toPlainText()
+			try:
+				self.currently_writing = self.txt_editor.toPlainText()
+				with open(self.pulled_file[0], "w") as f:
+					f.write(self.currently_writing)
+			except Exception as e:
+				print(str(e))
 
 
 	def saveFileas(self):
@@ -128,7 +133,7 @@ class TextEditor(QMainWindow):
 
 
 	def quitEditor(self):
-		self.quitask = QMessageBox.question(self, "Leaving?", "Do you want to quit?", QMessageBox.Yes | QMessageBox.No)
+		self.quitask = QMessageBox.question(self, "Leaving?", "Did you save your file?", QMessageBox.Yes | QMessageBox.No)
 		if self.quitask == QMessageBox.Yes:
 			sys.exit()
 		else:
