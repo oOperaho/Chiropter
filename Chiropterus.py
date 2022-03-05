@@ -113,11 +113,13 @@ class TextEditor(QMainWindow):
 		self.create_new.exec_()
 		if self.create_new.clickedButton() == self.yesButton:
 			self.saveFile()
-
+			self.txt_editor.setPlainText("")
+			self.changeWindowTitle()
 
 		elif self.create_new.clickedButton() == self.noButton:
-			with open("Unknown.txt", "w") as f:
-				f.write("")
+			self.txt_editor.setPlainText("")
+			print(self.pulled_file)
+			self.changeWindowTitle()
 		else:
 			pass
 
@@ -147,7 +149,7 @@ class TextEditor(QMainWindow):
 
 
 	def saveFileas(self):
-		self.pulled_file, _ = QFileDialog.getSaveFileName(self, "Save Your File", "File.txt")
+		self.pulled_file, _ = QFileDialog.getSaveFileName(self, "Save Your File", "Unknown.txt")
 
 		if self.pulled_file == "":
 			pass
@@ -168,11 +170,11 @@ class TextEditor(QMainWindow):
 			self.changeWindowTitle()
 
 	def changeWindowTitle(self):
-		if self.pulled_file:
+		if self.pulled_file is None:
+			self.setWindowTitle("Unknown.txt")
+		else:
 			self.pulled_filename = QUrl.fromLocalFile(self.pulled_file)
 			self.setWindowTitle(self.pulled_filename.fileName() + " | Chiropter")
-		else:
-			self.setWindowTitle("Unknown.txt")
 
 	def quitEditor(self):
 		self.quitask = QMessageBox.question(self, "Leaving?", "Did you save your file?", QMessageBox.Yes | QMessageBox.No)
