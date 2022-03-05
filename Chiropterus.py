@@ -137,9 +137,10 @@ class TextEditor(QMainWindow):
 			pass
 		else:
 			try:
-				self.saving_file = open(self.ready_file[0], "w")
-				self.saving_file.write(self.saving_file)
-			except:
+				self.currently_writing = self.txt_editor.toPlainText()
+				with open(self.ready_file[0], "w") as f:
+					f.write(self.currently_writing)
+			except Exception as e:
 				#  Change this to QMessageBox
 				print(str(e))
 
