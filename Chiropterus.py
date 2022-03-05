@@ -40,7 +40,7 @@ class TextEditor(QMainWindow):
 		self.save_file = QAction("&Save", self)
 		self.save_file.setShortcut("Ctrl+S")
 		self.saveas_file = QAction("&Save as", self)
-		self.saveas_file.setShortcut(QKeySequence("Ctrl+Shift+S"))
+		self.saveas_file.setShortcut("Ctrl+Shift+S")
 		self.quit = QAction("&Quit", self)
 		self.quit.setShortcut("Ctrl+Q")
 		self.file.addAction(self.new_file)
@@ -60,7 +60,7 @@ class TextEditor(QMainWindow):
 		self.undo_text = QAction("&Undo", self)
 		self.undo_text.setShortcut("Ctrl+Z")
 		self.redo_text = QAction("&Redo", self)
-		self.redo_text.setShortcut("Ctrl+B")
+		self.redo_text.setShortcut("Ctrl+Shift+Z")
 		self.select_text = QAction("&Select All", self)
 		self.select_text.setShortcut("Ctrl+A")
 		self.edit.addAction(self.copy_text)
@@ -78,7 +78,7 @@ class TextEditor(QMainWindow):
 		#  File menu actions
 		self.new_file.triggered.connect(self.newFile)
 		self.open_file.triggered.connect(self.openFile)
-		self.saveas_file.triggered.connect9(self.saveFile)
+		self.save_file.triggered.connect(self.saveFile)
 		self.saveas_file.triggered.connect(self.saveFileas)
 		self.quit.triggered.connect(self.quitEditor)
 
@@ -98,16 +98,25 @@ class TextEditor(QMainWindow):
 		if self.pulled_file[0] == "":
 			pass
 		else:
-			self.pulled_file_text = open(self.pulled_file[0]).read()
-			self.pulled_filename = QUrl.fromLocalFile(self.pulled_file[0])
-			self.txt_editor.setPlainText(self.pulled_file_text)
-			self.setWindowTitle(self.pulled_filename.fileName() + " | Chiropter")
+			try:
+				self.pulled_file_text = open(self.pulled_file[0]).read()
+			except Exception as e:
+				#  Change this to QMessageBox
+				print(str(e))
+			else:
+				self.pulled_filename = QUrl.fromLocalFile(self.pulled_file[0])
+				self.txt_editor.setPlainText(self.pulled_file_text)
+				self.setWindowTitle(self.pulled_filename.fileName() + " | Chiropter")
 
-	def savveFile(self):
-		pass
+	def saveFile(self):
+		if self.pulled_file[0] is None:
+			return self.saveFileas()
+		else:
+			self.currently_writing = self.txt_editor.toPlainText()
+
 
 	def saveFileas(self):
-		self.ready_file = QFileDialog.getSaveFileName(self, "Save Four File", "yourfile.txt")
+		self.ready_file = QFileDialog.getSaveFileName(self, "Save Four File", "File.txt")
 
 		if self.ready_file[0] == "":
 			pass
@@ -147,7 +156,7 @@ class TextEditor(QMainWindow):
 		self.undo_text.setShortcut("Ctrl+Z")
 		self.txt_editor.addAction(self.undo_text)
 		self.redo_text = QAction("&Redo", self)
-		self.redo_text.setShortcut("Ctrl+B")
+		self.redo_text.setShortcut("Ctrl+Shift+Z")
 		self.txt_editor.addAction(self.redo_text)
 		self.select_text = QAction("&Select All", self)
 		self.select_text.setShortcut("Ctrl+A")
