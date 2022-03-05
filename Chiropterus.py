@@ -17,6 +17,7 @@ class TextEditor(QMainWindow):
 		self.txt_layout = QVBoxLayout(self)
 		self.txt_widget = QWidget(self)
 		self.menu = QMenuBar(self)
+		self.pulled_file = None
 		self.setMenuBar(self.menu)
 		self.MenuBar()
 		self.Actions()
@@ -109,7 +110,7 @@ class TextEditor(QMainWindow):
 				self.setWindowTitle(self.pulled_filename.fileName() + " | Chiropter")
 
 	def saveFile(self):
-		if self.pulled_file[0] is None:
+		if self.pulled_file is None:
 			return self.saveFileas()
 		else:
 			self.currently_writing = self.txt_editor.toPlainText()
