@@ -108,46 +108,46 @@ class TextEditor(QMainWindow):
 			self.txt_editor.setPlainText("")
 
 	def openFile(self):
-		self.pulled_file = QFileDialog.getOpenFileName(self, "Search Your File", ".", "Text Docs (*.txt);All files (*.*)")
-		if self.pulled_file[0] == "":
+		self.pulled_file, _ = QFileDialog.getOpenFileName(self, "Search Your File", ".", "Text Docs (*.txt);All files (*.*)")
+		if self.pulled_file == "":
 			pass
 		else:
 			try:
-				self.pulled_file_text = open(self.pulled_file[0]).read()
+				self.pulled_file_text = open(self.pulled_file).read()
 			except Exception as e:
 				#  Change this to QMessageBox
 				print(str(e))
 			else:
-				self.pulled_filename = QUrl.fromLocalFile(self.pulled_file[0])
+				self.pulled_filename = QUrl.fromLocalFile(self.pulled_file)
 				self.txt_editor.setPlainText(self.pulled_file_text)
 				self.setWindowTitle(self.pulled_filename.fileName() + " | Chiropter")
 
 	def saveFile(self):
 		if self.pulled_file is None:
 			return self.saveFileas()
-		else:
-			try:
-				self.currently_writing = self.txt_editor.toPlainText()
-				with open(self.pulled_file[0], "w") as f:
-					f.write(self.currently_writing)
-			except Exception as e:
-				#  Change this to QMessageBox
-				print(str(e))
+		
+		self.manageSave(self.pulled_file)
 
 
 	def saveFileas(self):
-		self.ready_file = QFileDialog.getSaveFileName(self, "Save Four File", "File.txt")
+		self.pulled_file, _ = QFileDialog.getSaveFileName(self, "Save Four File", "File.txt")
 
-		if self.ready_file[0] == "":
+		if self.pulled_file == "":
 			pass
+		
+		self.manageSave(self.pulled_file)
+
+	def manageSave(self, path):
+		self.currently_writing = self.txt_editor.toPlainText()
+
+		try:
+			with open(path, "w") as f:
+				f.write(self.currently_writing)
+		except Exception as e:
+			#  Change this to QMessageBox
+			print(str(e))
 		else:
-			try:
-				self.currently_writing = self.txt_editor.toPlainText()
-				with open(self.ready_file[0], "w") as f:
-					f.write(self.currently_writing)
-			except Exception as e:
-				#  Change this to QMessageBox
-				print(str(e))
+			self.pulled_file = path
 
 
 	def quitEditor(self):
