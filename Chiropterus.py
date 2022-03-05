@@ -39,11 +39,14 @@ class TextEditor(QMainWindow):
 		self.open_file.setShortcut("Ctrl+O")
 		self.save_file = QAction("&Save", self)
 		self.save_file.setShortcut("Ctrl+S")
+		self.saveas_file = QAction("&Save as", self)
+		self.saveas_file.setShortcut(QKeySequence("Ctrl+Shift+S"))
 		self.quit = QAction("&Quit", self)
 		self.quit.setShortcut("Ctrl+Q")
 		self.file.addAction(self.new_file)
 		self.file.addAction(self.open_file)
 		self.file.addAction(self.save_file)
+		self.file.addAction(self.saveas_file)
 		self.file.addSeparator()
 		self.file.addAction(self.quit)
 
@@ -75,7 +78,8 @@ class TextEditor(QMainWindow):
 		#  File menu actions
 		self.new_file.triggered.connect(self.newFile)
 		self.open_file.triggered.connect(self.openFile)
-		self.save_file.triggered.connect(self.saveFileas)
+		self.saveas_file.triggered.connect9(self.saveFile)
+		self.saveas_file.triggered.connect(self.saveFileas)
 		self.quit.triggered.connect(self.quitEditor)
 
 		#  Edit menu actions
@@ -98,6 +102,9 @@ class TextEditor(QMainWindow):
 			self.pulled_filename = QUrl.fromLocalFile(self.pulled_file[0])
 			self.txt_editor.setPlainText(self.pulled_file_text)
 			self.setWindowTitle(self.pulled_filename.fileName() + " | Chiropter")
+
+	def savveFile(self):
+		pass
 
 	def saveFileas(self):
 		self.ready_file = QFileDialog.getSaveFileName(self, "Save Four File", "yourfile.txt")
