@@ -112,12 +112,14 @@ class TextEditor(QMainWindow):
 		self.cancelButton = self.create_new.button(QMessageBox.Cancel)
 		self.create_new.exec_()
 		if self.create_new.clickedButton() == self.yesButton:
-			pass
+			self.saveFile()
+			self.pulled_file, _ = QFileDialog.getSaveFileName(self, "Create your new file", "Unknown.txt")
+			with open(self.pulled_file, "w") as f:
+				f.write("")			
 
 
 		elif self.create_new.clickedButton() == self.noButton:
-			self.txt_editor.setPlainText("")
-			self.changeWindowTitle()
+			pass
 		else:
 			pass
 
@@ -220,7 +222,7 @@ def display():
 	with BatStyle:
 		qss = BatStyle.read()
 		w.setStyleSheet(qss)
-	w.setStyle("Breeze")
+	w.setStyle("Fusion")
 	ui = TextEditor()
 	ui.show()
 	w.exec()
