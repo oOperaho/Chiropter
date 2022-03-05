@@ -114,9 +114,11 @@ class TextEditor(QMainWindow):
 		if self.create_new.clickedButton() == self.yesButton:
 			self.saveFile()
 			self.pulled_file, _ = QFileDialog.getSaveFileName(self, "Create your new file", "Unknown.txt")
-			with open(self.pulled_file, "w") as f:
-				f.write("")			
-
+			if self.pulled_file == "":
+				return
+			else:
+				with open(self.pulled_file, "w") as f:
+					f.write("")			
 
 		elif self.create_new.clickedButton() == self.noButton:
 			pass
