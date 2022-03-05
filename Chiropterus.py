@@ -101,8 +101,16 @@ class TextEditor(QMainWindow):
 		self.select_text.triggered.connect(self.txt_editor.selectAll)
 
 	def newFile(self):
-		self.create_new = QMessageBox.question(self, "Create new file", "Save current file?", QMessageBox.Yes | QMessageBox.No)
-		if self.create_new == QMessageBox.Yes:
+		self.create_new = QMessageBox()
+		self.create_new.setWindowTitle("Create new file")
+		self.create_new.setText("\nHow do you want to create a new file?")
+		self.buttons = self.create_new.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+		self.okButton = self.create_new.button(QMessageBox.Ok)
+		self.okButton.setText("Save and open new file")
+		self.cancelButton = self.create_new.button(QMessageBox.Cancel)
+		self.cancelButton.setText("Just open new file")
+		self.create_new.exec_()
+		if self.create_new.clickedButton() == self.okButton:
 			with open("NewFile.txt", "w") as f:
 				f.write("")
 			self.saveFile()
