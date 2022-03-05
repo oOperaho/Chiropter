@@ -103,24 +103,30 @@ class TextEditor(QMainWindow):
 	def newFile(self):
 		self.create_new = QMessageBox.question(self, "Create new file", "Save current file?", QMessageBox.Yes | QMessageBox.No)
 		if self.create_new == QMessageBox.Yes:
-			return self.saveFile()
+			with open("NewFile.txt", "w") as f:
+				f.write("")
+			self.saveFile()
 		else:
-			self.txt_editor.setPlainText("")
+			with open("Unknown.txt", "w") as f:
+				f.write("")
 
 	def openFile(self):
-		self.pulled_file, _ = QFileDialog.getOpenFileName(self, "Search Your File", ".", "Text Docs (*.txt);All files (*.*)")
-		if self.pulled_file == "":
-			pass
-		else:
-			try:
-				self.pulled_file_text = open(self.pulled_file).read()
-			except Exception as e:
-				#  Change this to QMessageBox
-				print(str(e))
+		self.alert_box = QMessageBox.question(self, "Open file", "\nThe current changes will be overwrited. \nMake sure you saved the file.", QMessageBox.Ok | QMessageBox.Cancel)
+		if self.alert_box == QMessageBox.Ok:
+			self.pulled_file, _ = QFileDialog.getOpenFileName(self, "Search Your File", ".", "Text Docs (*.txt);All files (*.*)")
+			if self.pulled_file == "":
+				pass
 			else:
-				self.pulled_filename = QUrl.fromLocalFile(self.pulled_file)
-				self.txt_editor.setPlainText(self.pulled_file_text)
-				self.setWindowTitle(self.pulled_filename.fileName() + " | Chiropter")
+				try:
+					self.pulled_file_text = open(self.pulled_file).read()
+				except Exception as e:
+					#  Change this to QMessageBox
+					print(str(e))
+				else:
+					self.txt_editor.setPlainText(self.pulled_file_text)
+					self.changeWindowTitle()
+		else:
+			pass
 
 	def saveFile(self):
 		if self.pulled_file is None:
@@ -148,7 +154,14 @@ class TextEditor(QMainWindow):
 			print(str(e))
 		else:
 			self.pulled_file = path
+			self.changeWindowTitle()
 
+	def changeWindowTitle(self):
+		if self.pulled_file:
+			self.pulled_filename = QUrl.fromLocalFile(self.pulled_file)
+			self.setWindowTitle(self.pulled_filename.fileName() + " | Chiropter")
+		else:
+			self.setWindowTitle("Unknown.txt")
 
 	def quitEditor(self):
 		self.quitask = QMessageBox.question(self, "Leaving?", "Did you save your file?", QMessageBox.Yes | QMessageBox.No)
