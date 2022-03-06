@@ -5,7 +5,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
-objects = ["Menu", "LineEdit", "Box", "MenuBar"]
+objects = ["Menu", "LineEdit", "Box", "MenuBar", "StatusBar"]
 
 
 class TextEditor(QMainWindow):
@@ -18,12 +18,12 @@ class TextEditor(QMainWindow):
 		self.txt_layout = QVBoxLayout(self)
 		self.txt_widget = QWidget(self)
 		self.menu = QMenuBar(self)
-		self.statusBar = self.statusBar()
 		self.pulled_file = None
 		self.setMenuBar(self.menu)
 		self.MenuBar()
 		self.Actions()
 		self.TxtField()
+		self.makeStatusBar()
 		Rightclick(self)
 
 	def MenuBar(self):
@@ -133,7 +133,7 @@ class TextEditor(QMainWindow):
 			return self.saveFileas()
 		
 		self.manageSave(self.pulled_file)
-
+		self.statusbar.showMessage("Saved")
 
 	def saveFileas(self):
 		#  Create file and save it
@@ -173,3 +173,8 @@ class TextEditor(QMainWindow):
 			sys.exit()
 		else:
 			pass
+
+	def makeStatusBar(self):
+		self.statusbar = self.statusBar()
+		self.statusbar.showMessage("Unsaved")
+		self.statusbar.setObjectName(objects[4])

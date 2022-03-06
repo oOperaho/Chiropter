@@ -20,3 +20,8 @@ QMenuBar#MenuBar
 	background-color: #313232;
 	color: white;
 }
+
+QStatusBar#StatusBar
+{
+	color: white;
+}
