@@ -24,4 +24,5 @@ QMenuBar#MenuBar
 QStatusBar#StatusBar
 {
 	color: white;
+	font-size: 12px;
 }
