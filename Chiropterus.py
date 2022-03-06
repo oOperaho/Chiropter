@@ -101,29 +101,9 @@ class TextEditor(QMainWindow):
 		self.select_text.triggered.connect(self.txt_editor.selectAll)
 
 	def newFile(self):
-		self.create_new = QMessageBox()
-		self.create_new.setWindowTitle("Create new file")
-		self.create_new.setText("\nHow do you want to create a new file?")
-		self.buttons = self.create_new.setStandardButtons(QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
-		self.yesButton = self.create_new.button(QMessageBox.Yes)
-		self.yesButton.setText("Save and open new file")
-		self.noButton = self.create_new.button(QMessageBox.No)
-		self.noButton.setText("Just open a new file")
-		self.cancelButton = self.create_new.button(QMessageBox.Cancel)
-		self.create_new.exec_()
-		if self.create_new.clickedButton() == self.yesButton:
-			self.saveFile()
-			self.pulled_file, _ = QFileDialog.getSaveFileName(self, "Create your new file", "Unknown.txt")
-			if self.pulled_file == "":
-				return
-			else:
-				with open(self.pulled_file, "w") as f:
-					f.write("")			
-
-		elif self.create_new.clickedButton() == self.noButton:
-			pass
-		else:
-			pass
+		self.new_file_window = TextEditor(self)
+		self.new_file_window.show()
+		self.new_file_window.setWindowTitle("Unknown.txt | Chiropter")
 
 	def openFile(self):
 		self.alert_box = QMessageBox.question(self, "Open file", "\nThe current changes will be overwrited. \nMake sure you saved the file.", QMessageBox.Ok | QMessageBox.Cancel)
@@ -219,7 +199,7 @@ class TextEditor(QMainWindow):
 def display():
 	import sys
 	w = QApplication(sys.argv)
-	w.setApplicationName("Chiropter")
+	w.setApplicationName("Main | Chiropter")
 	BatStyle = open("Styles/BatStyle.qss", "r")
 	with BatStyle:
 		qss = BatStyle.read()
