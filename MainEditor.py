@@ -1,4 +1,5 @@
 import os
+import sys
 from SideEditor import Rightclick
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
@@ -101,11 +102,13 @@ class TextEditor(QMainWindow):
 		self.select_text.triggered.connect(self.txt_editor.selectAll)
 
 	def newFile(self):
+		#  Create window for new file
 		self.new_file_window = TextEditor(self)
 		self.new_file_window.show()
 		self.new_file_window.setWindowTitle("Unknown.txt | Chiropter")
 
 	def openFile(self):
+		#  Open selected file
 		self.alert_box = QMessageBox.question(self, "Open file", "\nThe current changes will be overwrited. \nMake sure you saved the file.", QMessageBox.Ok | QMessageBox.Cancel)
 		if self.alert_box == QMessageBox.Ok:
 			self.pulled_file, _ = QFileDialog.getOpenFileName(self, "Search Your File", ".", "Text Docs (*.txt);All files (*.*)")
@@ -124,6 +127,7 @@ class TextEditor(QMainWindow):
 			pass
 
 	def saveFile(self):
+		#  Save current file
 		if self.pulled_file is None:
 			return self.saveFileas()
 		
@@ -131,6 +135,7 @@ class TextEditor(QMainWindow):
 
 
 	def saveFileas(self):
+		#  Create file and save it
 		self.pulled_file, _ = QFileDialog.getSaveFileName(self, "Save Your File", "Unknown.txt")
 
 		if self.pulled_file == "":
@@ -139,6 +144,7 @@ class TextEditor(QMainWindow):
 		self.manageSave(self.pulled_file)
 
 	def manageSave(self, path):
+		#  Does the process of saveFile() and saveFileas()
 		self.currently_writing = self.txt_editor.toPlainText()
 
 		try:
@@ -152,6 +158,7 @@ class TextEditor(QMainWindow):
 			self.changeWindowTitle()
 
 	def changeWindowTitle(self):
+		#  Updates the title of the window
 		if self.pulled_file is None:
 			self.setWindowTitle("Unknown.txt")
 		else:
@@ -159,7 +166,8 @@ class TextEditor(QMainWindow):
 			self.setWindowTitle(self.pulled_filename.fileName() + " | Chiropter")
 
 	def quitEditor(self):
-		self.quitask = QMessageBox.question(self, "Leaving?", "Did you save your file?", QMessageBox.Yes | QMessageBox.No)
+		#  Quit Chiropter
+		self.quitask = QMessageBox.question(self, "Leaving?", "\nDo you want to quit?", QMessageBox.Yes | QMessageBox.No)
 		if self.quitask == QMessageBox.Yes:
 			sys.exit()
 		else:
