@@ -18,6 +18,7 @@ class TextEditor(QMainWindow):
 		self.txt_layout = QVBoxLayout(self)
 		self.txt_widget = QWidget(self)
 		self.menu = QMenuBar(self)
+		self.statusBar = self.statusBar()
 		self.pulled_file = None
 		self.setMenuBar(self.menu)
 		self.MenuBar()
