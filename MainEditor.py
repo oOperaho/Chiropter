@@ -1,4 +1,5 @@
 import os
+from SideEditor import Rightclick
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
@@ -21,7 +22,7 @@ class TextEditor(QMainWindow):
 		self.MenuBar()
 		self.Actions()
 		self.TxtField()
-		self.Rightclick()
+		Rightclick(self)
 
 	def MenuBar(self):
 		self.file = QMenu("&File", self)
@@ -163,32 +164,3 @@ class TextEditor(QMainWindow):
 			sys.exit()
 		else:
 			pass
-
-	def Rightclick(self):
-		#  Right click menu
-		self.txt_editor.setContextMenuPolicy(Qt.ActionsContextMenu)
-		self.copy_text = QAction("&Copy", self)
-		self.copy_text.setShortcut("Ctrl+C")
-		self.txt_editor.addAction(self.copy_text)
-		self.paste_text = QAction("&Paste", self)
-		self.paste_text.setShortcut("Ctrl+V")
-		self.txt_editor.addAction(self.paste_text)
-		self.cut_text = QAction("&Cut", self)
-		self.cut_text.setShortcut("Ctrl+X")
-		self.txt_editor.addAction(self.cut_text)
-		self.undo_text = QAction("&Undo", self)
-		self.undo_text.setShortcut("Ctrl+Z")
-		self.txt_editor.addAction(self.undo_text)
-		self.redo_text = QAction("&Redo", self)
-		self.redo_text.setShortcut("Ctrl+Shift+Z")
-		self.txt_editor.addAction(self.redo_text)
-		self.select_text = QAction("&Select All", self)
-		self.select_text.setShortcut("Ctrl+A")
-		self.txt_editor.addAction(self.select_text)
-		
-		self.copy_text.triggered.connect(self.txt_editor.copy)
-		self.paste_text.triggered.connect(self.txt_editor.paste)
-		self.cut_text.triggered.connect(self.txt_editor.cut)
-		self.undo_text.triggered.connect(self.txt_editor.undo)
-		self.redo_text.triggered.connect(self.txt_editor.redo)
-		self.select_text.triggered.connect(self.txt_editor.selectAll)
