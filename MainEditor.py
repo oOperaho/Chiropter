@@ -11,13 +11,14 @@ objects = ["Menu", "LineEdit", "Box", "MenuBar", "StatusBar"]
 class TextEditor(QMainWindow):
 
 	def __init__(self, parent=None):
-		super().__init__(parent)
+		super().__init__(parent=parent)
 		self.resize(500, 500)
 		self.setObjectName(objects[0])
 		self.txt_editor = QPlainTextEdit(self)
 		self.txt_layout = QVBoxLayout(self)
 		self.txt_widget = QWidget(self)
 		self.menu = QMenuBar(self)
+		self.currentStatus = QLabel(self)
 		self.pulled_file = None
 		self.setMenuBar(self.menu)
 		self.MenuBar()
@@ -53,6 +54,9 @@ class TextEditor(QMainWindow):
 		self.file.addAction(self.saveas_file)
 		self.file.addSeparator()
 		self.file.addAction(self.quit)
+
+		#  Status bar setting
+		self.txt_editor.textChanged.connect(self.saveFile)
 
 		#  Edit button setting
 		self.copy_text = QAction("&Copy", self)
@@ -97,6 +101,7 @@ class TextEditor(QMainWindow):
 		self.txt_widget.setLayout(self.txt_layout)
 		self.setCentralWidget(self.txt_widget)
 
+
 	def Actions(self):
 		#  File menu actions
 		self.new_file.triggered.connect(self.newFile)
@@ -113,19 +118,6 @@ class TextEditor(QMainWindow):
 		self.redo_text.triggered.connect(self.txt_editor.redo)
 		self.select_text.triggered.connect(self.txt_editor.selectAll)
 
-	def keyPressEvent(self, signal):
-		return self.manageStatusMessage()
-
-	def manageStatusMessage(self):
-		if self.pulled_file != None:
-			self.check_file = open(self.pulled_file, "r").read()
-			self.current_file = self.txt_editor.toPlainText()
-			if self.check_file == self.current_file:
-				pass
-			else:
-				self.currentStatus.setText("Unsaved")
-		else:
-			pass
 
 	def newFile(self):
 		#  Create window for new file
@@ -139,6 +131,7 @@ class TextEditor(QMainWindow):
 
 		self.alert_box = QMessageBox.question(self, "Open file", "\nThe current changes will be overwrited. \nMake sure you saved the file.", QMessageBox.Ok | QMessageBox.Cancel)
 		if self.alert_box == QMessageBox.Ok:
+			self.currentStatus.setText("Opening new file")
 			self.pulled_file, _ = QFileDialog.getOpenFileName(self, "Search Your File", ".", "Text Docs (*.txt);All files (*.*)")
 			if self.pulled_file == "":
 				pass
@@ -158,6 +151,7 @@ class TextEditor(QMainWindow):
 		#  Save current file
 
 		if self.pulled_file is None:
+			self.currentStatus.setText("Saving")
 			return self.saveFileas()
 		
 		self.manageSave(self.pulled_file)
@@ -172,6 +166,7 @@ class TextEditor(QMainWindow):
 			pass
 		
 		self.manageSave(self.pulled_file)
+		self.currentStatus.setText("Saved")
 
 	def manageSave(self, path):
 		#  Does the process of saveFile() and saveFileas()
@@ -208,7 +203,6 @@ class TextEditor(QMainWindow):
 
 	def makeStatusBar(self):
 		self.statusbar = self.statusBar()
-		self.currentStatus = QLabel()
 		self.currentStatus.setText("Unsaved")
 		self.statusbar.addWidget(self.currentStatus)
 		self.currentStatus.setObjectName(objects[4])
