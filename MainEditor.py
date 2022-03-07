@@ -118,6 +118,8 @@ class TextEditor(QMainWindow):
 		self.select_text.triggered.connect(self.txt_editor.selectAll)
 
 	def manageStatus(self):
+		#  Everytime the text changes, the status changes to Unsaved
+
 		self.currentStatus.setText("Unsaved")
 
 	def newFile(self):
@@ -156,7 +158,7 @@ class TextEditor(QMainWindow):
 			return self.saveFileas()
 		
 		self.manageSave(self.pulled_file)
-		self.currentStatus.setText("Saved")
+		self.currentStatus.setText("Saved")  #  Sets status bar everytime the file is saved
 
 	def saveFileas(self):
 		#  Create file and save it
