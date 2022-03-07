@@ -29,20 +29,20 @@ class TextEditor(QMainWindow):
 	def MenuBar(self):
 		self.file = QMenu("&File", self)
 		self.edit = QMenu("&Edit", self)
-		self.style = QMenu("&Styles", self)
+		self.settings = QMenu("&Settings", self)
 		self.menu.addMenu(self.file)
 		self.menu.addMenu(self.edit)
-		self.menu.addMenu(self.style)
+		self.menu.addMenu(self.settings)
 		self.menu.setObjectName(objects[3])
 
 		#  File button setting
 		self.new_file = QAction("&New", self)
 		self.new_file.setShortcut("Ctrl+N")
-		self.open_file = QAction("&Open", self)
+		self.open_file = QAction("&Open...", self)
 		self.open_file.setShortcut("Ctrl+O")
 		self.save_file = QAction("&Save", self)
 		self.save_file.setShortcut("Ctrl+S")
-		self.saveas_file = QAction("&Save as", self)
+		self.saveas_file = QAction("&Save as...", self)
 		self.saveas_file.setShortcut("Ctrl+Shift+S")
 		self.quit = QAction("&Quit", self)
 		self.quit.setShortcut("Ctrl+Q")
@@ -73,10 +73,19 @@ class TextEditor(QMainWindow):
 		self.edit.addAction(self.redo_text)
 		self.edit.addAction(self.select_text)
 
-		#  Style button setting
-		self.style.addAction(QAction("&BatStyle", self))
-		self.style.addAction(QAction("&Photony", self))
-		self.style.addAction(QAction("&Afterbreeze", self))
+		#  Settings button setting
+		self.styles = self.settings.addMenu("&Styles")
+		self.language = self.settings.addMenu("&Language")
+		self.batstyle = QAction("&BatStyle", self)
+		self.afterbreeze = QAction("&Afterbreeze", self)
+		self.english = QAction("&English", self)
+		self.portuguese = QAction("&Portuguese")
+
+		#  Adding submenus
+		self.styles.addAction(self.batstyle)
+		self.styles.addAction(self.afterbreeze)
+		self.language.addAction(self.english)
+		self.language.addAction(self.portuguese)
 
 
 	def TxtField(self):
@@ -133,7 +142,7 @@ class TextEditor(QMainWindow):
 			return self.saveFileas()
 		
 		self.manageSave(self.pulled_file)
-		self.statusbar.showMessage("Saved")
+		self.currentStatus.setText("Saved")
 
 	def saveFileas(self):
 		#  Create file and save it
@@ -176,5 +185,7 @@ class TextEditor(QMainWindow):
 
 	def makeStatusBar(self):
 		self.statusbar = self.statusBar()
-		self.statusbar.showMessage("Unsaved")
-		self.statusbar.setObjectName(objects[4])
+		self.currentStatus = QLabel()
+		self.currentStatus.setText("Unsaved")
+		self.statusbar.addWidget(self.currentStatus)
+		self.currentStatus.setObjectName(objects[4])

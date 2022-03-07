@@ -21,7 +21,7 @@ QMenuBar#MenuBar
 	color: white;
 }
 
-QStatusBar#StatusBar
+QLabel#StatusBar
 {
 	color: white;
 	font-size: 12px;
