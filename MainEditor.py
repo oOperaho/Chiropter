@@ -27,6 +27,7 @@ class TextEditor(QMainWindow):
 		Rightclick(self)
 
 	def MenuBar(self):
+		#  Main window
 		self.file = QMenu("&File", self)
 		self.edit = QMenu("&Edit", self)
 		self.settings = QMenu("&Settings", self)
@@ -89,6 +90,7 @@ class TextEditor(QMainWindow):
 
 
 	def TxtField(self):
+		#  Adding plain text to layout
 		self.txt_editor.setObjectName(objects[1])
 		self.txt_layout.setObjectName(objects[2])
 		self.txt_layout.addWidget(self.txt_editor)
@@ -111,14 +113,30 @@ class TextEditor(QMainWindow):
 		self.redo_text.triggered.connect(self.txt_editor.redo)
 		self.select_text.triggered.connect(self.txt_editor.selectAll)
 
+	def keyPressEvent(self, signal):
+		return self.manageStatusMessage()
+
+	def manageStatusMessage(self):
+		if self.pulled_file != None:
+			self.check_file = open(self.pulled_file, "r").read()
+			self.current_file = self.txt_editor.toPlainText()
+			if self.check_file == self.current_file:
+				pass
+			else:
+				self.currentStatus.setText("Unsaved")
+		else:
+			pass
+
 	def newFile(self):
 		#  Create window for new file
+
 		self.new_file_window = TextEditor(self)
 		self.new_file_window.show()
 		self.new_file_window.setWindowTitle("Unknown.txt | Chiropter")
 
 	def openFile(self):
 		#  Open selected file
+
 		self.alert_box = QMessageBox.question(self, "Open file", "\nThe current changes will be overwrited. \nMake sure you saved the file.", QMessageBox.Ok | QMessageBox.Cancel)
 		if self.alert_box == QMessageBox.Ok:
 			self.pulled_file, _ = QFileDialog.getOpenFileName(self, "Search Your File", ".", "Text Docs (*.txt);All files (*.*)")
@@ -138,6 +156,7 @@ class TextEditor(QMainWindow):
 
 	def saveFile(self):
 		#  Save current file
+
 		if self.pulled_file is None:
 			return self.saveFileas()
 		
@@ -146,6 +165,7 @@ class TextEditor(QMainWindow):
 
 	def saveFileas(self):
 		#  Create file and save it
+
 		self.pulled_file, _ = QFileDialog.getSaveFileName(self, "Save Your File", "Unknown.txt")
 
 		if self.pulled_file == "":
@@ -155,6 +175,7 @@ class TextEditor(QMainWindow):
 
 	def manageSave(self, path):
 		#  Does the process of saveFile() and saveFileas()
+
 		self.currently_writing = self.txt_editor.toPlainText()
 
 		try:
@@ -169,6 +190,7 @@ class TextEditor(QMainWindow):
 
 	def changeWindowTitle(self):
 		#  Updates the title of the window
+
 		if self.pulled_file is None:
 			self.setWindowTitle("Unknown.txt")
 		else:
@@ -177,6 +199,7 @@ class TextEditor(QMainWindow):
 
 	def quitEditor(self):
 		#  Quit Chiropter
+
 		self.quitask = QMessageBox.question(self, "Leaving?", "\nDo you want to quit?", QMessageBox.Yes | QMessageBox.No)
 		if self.quitask == QMessageBox.Yes:
 			sys.exit()
