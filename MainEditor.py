@@ -195,14 +195,30 @@ class TextEditor(QMainWindow):
 			self.pulled_filename = QUrl.fromLocalFile(self.pulled_file)
 			self.setWindowTitle(self.pulled_filename.fileName() + " | Chiropter")
 
-	def quitEditor(self):
-		#  Quit Chiropter
+	def closeEvent(self, signal):
+		#  Quit with X button
 
-		self.quitask = QMessageBox.question(self, "Leaving?", "\nDo you want to quit?", QMessageBox.Yes | QMessageBox.No)
-		if self.quitask == QMessageBox.Yes:
-			sys.exit()
+		if self.currentStatus.text() == "Unsaved":
+			self.quitask = QMessageBox.question(self, "Leaving?", "\nYou have unsaved changes. Are you sure you want to quit?", QMessageBox.Yes | QMessageBox.No)
+			if self.quitask == QMessageBox.Yes:
+				signal.accept()
+			else:
+				signal.ignore()
 		else:
-			pass
+			signal.accept()
+
+	def quitEditor(self):
+		#  Quit button pressed
+
+		if self.currentStatus.text() == "Unsaved":
+			print("how")
+			self.quitask = QMessageBox.question(self, "Leaving?", "\nYou have unsaved changes. Are you sure you want to quit?", QMessageBox.Yes | QMessageBox.No)
+			if self.quitask == QMessageBox.Yes:
+				sys.exit()
+			else:
+				pass
+		else:
+			sys.exit()
 
 	def makeStatusBar(self):
 		self.statusbar = self.statusBar()
