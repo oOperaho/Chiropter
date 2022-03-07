@@ -56,7 +56,7 @@ class TextEditor(QMainWindow):
 		self.file.addAction(self.quit)
 
 		#  Status bar setting
-		self.txt_editor.textChanged.connect(self.saveFile)
+		self.txt_editor.textChanged.connect(self.manageStatus)
 
 		#  Edit button setting
 		self.copy_text = QAction("&Copy", self)
@@ -92,7 +92,6 @@ class TextEditor(QMainWindow):
 		self.language.addAction(self.english)
 		self.language.addAction(self.portuguese)
 
-
 	def TxtField(self):
 		#  Adding plain text to layout
 		self.txt_editor.setObjectName(objects[1])
@@ -118,6 +117,8 @@ class TextEditor(QMainWindow):
 		self.redo_text.triggered.connect(self.txt_editor.redo)
 		self.select_text.triggered.connect(self.txt_editor.selectAll)
 
+	def manageStatus(self):
+		self.currentStatus.setText("Unsaved")
 
 	def newFile(self):
 		#  Create window for new file
