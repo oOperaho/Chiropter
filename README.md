@@ -1,4 +1,4 @@
-![Chiropter](https://user-images.githubusercontent.com/61850743/157271340-1972a9bf-f5bf-403f-8b1c-726ab699377d.png)
+![Chiropter](https://user-images.githubusercontent.com/61850743/157271901-1f97c7ef-4607-43eb-9a45-95acf13de4fb.png)
 
 # Chiropter
 
