@@ -7,13 +7,13 @@ I'll try after a while to refactor the code and add more styles/languages, and m
 Install it:
 
 You'll need [Python](https://www.python.org/downloads/) and PYQt5 installed:
-
-> pip install PyQt5
-
+```
+pip install PyQt5
+```
 Then:
-
-> git clone "https://github.com/oOperaho/Chiropter"
-> cd [folder-you-downloaded]
-> python Chiropterus.py
-
+```
+git clone "https://github.com/oOperaho/Chiropter"
+cd [folder-you-downloaded]
+python Chiropterus.py
+```
 ![image](https://user-images.githubusercontent.com/61850743/157149507-37e0fd34-5582-4f16-84bf-2945fd359ebc.png)
