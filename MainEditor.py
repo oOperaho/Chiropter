@@ -33,9 +33,11 @@ class TextEditor(QMainWindow):
 		self.file = QMenu("&File", self)
 		self.edit = QMenu("&Edit", self)
 		self.settings = QMenu("&Settings", self)
+		self.about = QMenu("&About", self)
 		self.menu.addMenu(self.file)
 		self.menu.addMenu(self.edit)
 		self.menu.addMenu(self.settings)
+		self.menu.addMenu(self.about)
 		self.menu.setObjectName(objects[3])
 
 		#  File button setting
@@ -96,6 +98,10 @@ class TextEditor(QMainWindow):
 		self.language.addAction(self.english)
 		self.language.addAction(self.portuguese)
 
+		#  About about setting
+		self.repo = QAction("&Source code...", self)
+		self.about.addAction(self.repo)
+
 	def TxtField(self):
 		#  Adding plain text to layout
 		self.txt_editor.setObjectName(objects[1])
@@ -109,6 +115,14 @@ class TextEditor(QMainWindow):
 		self.statusbar.addWidget(self.currentStatus)
 		self.currentStatus.setText("Unsaved")
 		self.currentStatus.setStyleSheet("""color: white; font-size: 12px""")
+
+	def openRepo(self):
+		#  Open repository on Github
+		
+		import webbrowser
+
+		self.url = "https://github.com/oOperaho/Chiropter"
+		webbrowser.open_new(self.url)
 
 	def manageStatus(self):
 		#  Everytime the text changes, the status changes to Unsaved

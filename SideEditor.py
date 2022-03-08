@@ -49,3 +49,6 @@ def Actions(self):
 	self.redo_text.triggered.connect(self.txt_editor.redo)
 	self.select_text.triggered.connect(self.txt_editor.selectAll)
 	self.check_words.triggered.connect(self.checkWords)
+
+	#  About menu actions
+	self.repo.triggered.connect(self.openRepo)
