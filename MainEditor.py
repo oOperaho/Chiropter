@@ -1,6 +1,7 @@
 import os
 import sys
 from SideEditor import Rightclick
+from SideEditor import Actions
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
@@ -22,7 +23,7 @@ class TextEditor(QMainWindow):
 		self.pulled_file = None
 		self.setMenuBar(self.menu)
 		self.MenuBar()
-		self.Actions()
+		Actions(self)
 		self.TxtField()
 		self.makeStatusBar()
 		Rightclick(self)
@@ -99,23 +100,6 @@ class TextEditor(QMainWindow):
 		self.txt_layout.addWidget(self.txt_editor)
 		self.txt_widget.setLayout(self.txt_layout)
 		self.setCentralWidget(self.txt_widget)
-
-
-	def Actions(self):
-		#  File menu actions
-		self.new_file.triggered.connect(self.newFile)
-		self.open_file.triggered.connect(self.openFile)
-		self.save_file.triggered.connect(self.saveFile)
-		self.saveas_file.triggered.connect(self.saveFileas)
-		self.quit.triggered.connect(self.quitEditor)
-
-		#  Edit menu actions
-		self.copy_text.triggered.connect(self.txt_editor.copy)
-		self.paste_text.triggered.connect(self.txt_editor.paste)
-		self.cut_text.triggered.connect(self.txt_editor.cut)
-		self.undo_text.triggered.connect(self.txt_editor.undo)
-		self.redo_text.triggered.connect(self.txt_editor.redo)
-		self.select_text.triggered.connect(self.txt_editor.selectAll)
 
 	def manageStatus(self):
 		#  Everytime the text changes, the status changes to Unsaved

@@ -29,3 +29,19 @@ def Rightclick(self):
 	self.undo_text.triggered.connect(self.txt_editor.undo)
 	self.redo_text.triggered.connect(self.txt_editor.redo)
 	self.select_text.triggered.connect(self.txt_editor.selectAll)
+
+def Actions(self):
+	#  File menu actions
+	self.new_file.triggered.connect(self.newFile)
+	self.open_file.triggered.connect(self.openFile)
+	self.save_file.triggered.connect(self.saveFile)
+	self.saveas_file.triggered.connect(self.saveFileas)
+	self.quit.triggered.connect(self.quitEditor)
+
+	#  Edit menu actions
+	self.copy_text.triggered.connect(self.txt_editor.copy)
+	self.paste_text.triggered.connect(self.txt_editor.paste)
+	self.cut_text.triggered.connect(self.txt_editor.cut)
+	self.undo_text.triggered.connect(self.txt_editor.undo)
+	self.redo_text.triggered.connect(self.txt_editor.redo)
+	self.select_text.triggered.connect(self.txt_editor.selectAll)
