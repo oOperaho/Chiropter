@@ -101,6 +101,12 @@ class TextEditor(QMainWindow):
 		self.txt_widget.setLayout(self.txt_layout)
 		self.setCentralWidget(self.txt_widget)
 
+	def makeStatusBar(self):
+		self.statusbar = self.statusBar()
+		self.currentStatus.setText("Unsaved")
+		self.statusbar.addWidget(self.currentStatus)
+		self.currentStatus.setObjectName(objects[4])
+
 	def manageStatus(self):
 		#  Everytime the text changes, the status changes to Unsaved
 
@@ -184,12 +190,6 @@ class TextEditor(QMainWindow):
 		else:
 			self.pulled_filename = QUrl.fromLocalFile(self.pulled_file)
 			self.setWindowTitle(self.pulled_filename.fileName() + " | Chiropter")
-
-	def makeStatusBar(self):
-		self.statusbar = self.statusBar()
-		self.currentStatus.setText("Unsaved")
-		self.statusbar.addWidget(self.currentStatus)
-		self.currentStatus.setObjectName(objects[4])
 
 	def closeEvent(self, signal):
 		#  Quit with X button
