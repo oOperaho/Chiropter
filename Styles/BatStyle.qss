@@ -20,9 +20,3 @@ QMenuBar#MenuBar
 	background-color: #313232;
 	color: white;
 }
-
-QLabel#StatusBar
-{
-	color: white;
-	font-size: 12px;
-}

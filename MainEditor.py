@@ -72,12 +72,15 @@ class TextEditor(QMainWindow):
 		self.redo_text.setShortcut("Ctrl+Shift+Z")
 		self.select_text = QAction("&Select All", self)
 		self.select_text.setShortcut("Ctrl+A")
+		self.check_words = QAction("&Words...", self)
+		self.check_words.setShortcut("Ctrl+Shift+A")
 		self.edit.addAction(self.copy_text)
 		self.edit.addAction(self.paste_text)
 		self.edit.addAction(self.cut_text)
 		self.edit.addAction(self.undo_text)
 		self.edit.addAction(self.redo_text)
 		self.edit.addAction(self.select_text)
+		self.edit.addAction(self.check_words)
 
 		#  Settings button setting
 		self.styles = self.settings.addMenu("&Styles")
@@ -103,21 +106,27 @@ class TextEditor(QMainWindow):
 
 	def makeStatusBar(self):
 		self.statusbar = self.statusBar()
-		self.currentStatus.setText("Unsaved")
 		self.statusbar.addWidget(self.currentStatus)
-		self.currentStatus.setObjectName(objects[4])
+		self.currentStatus.setText("Unsaved")
+		self.currentStatus.setStyleSheet("""color: white; font-size: 12px""")
 
 	def manageStatus(self):
 		#  Everytime the text changes, the status changes to Unsaved
 
 		self.currentStatus.setText("Unsaved")
 
+	def checkWords(self):
+		self.words_on_text = self.txt_editor.toPlainText().replace(" ", "")
+		if self.currentStatus.text() == "Unsaved" or self.currentStatus.text() == "Saved":
+			self.currentStatus.setText(f"{self.currentStatus.text()}   {len(self.words_on_text)} characters")
+
 	def newFile(self):
 		#  Create window for new file
 
 		self.new_file_window = TextEditor(self)
 		self.new_file_window.show()
-		self.new_file_window.setWindowTitle("Unknown.txt | Chiropter")
+		#self.new_file_window.setWindowTitle("Unknown.txt | Chiropter")
+		self.changeWindowTitle()
 
 	def openFile(self):
 		#  Open selected file

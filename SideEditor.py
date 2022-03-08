@@ -22,6 +22,8 @@ def Rightclick(self):
 	self.select_text = QAction("&Select All", self)
 	self.select_text.setShortcut("Ctrl+A")
 	self.txt_editor.addAction(self.select_text)
+	self.check_words = QAction("&Words...", self)
+	self.txt_editor.addAction(self.check_words)
 		
 	self.copy_text.triggered.connect(self.txt_editor.copy)
 	self.paste_text.triggered.connect(self.txt_editor.paste)
@@ -29,6 +31,7 @@ def Rightclick(self):
 	self.undo_text.triggered.connect(self.txt_editor.undo)
 	self.redo_text.triggered.connect(self.txt_editor.redo)
 	self.select_text.triggered.connect(self.txt_editor.selectAll)
+	self.check_words.triggered.connect(self.checkWords)
 
 def Actions(self):
 	#  File menu actions
@@ -45,3 +48,4 @@ def Actions(self):
 	self.undo_text.triggered.connect(self.txt_editor.undo)
 	self.redo_text.triggered.connect(self.txt_editor.redo)
 	self.select_text.triggered.connect(self.txt_editor.selectAll)
+	self.check_words.triggered.connect(self.checkWords)
