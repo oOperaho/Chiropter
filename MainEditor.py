@@ -132,23 +132,29 @@ class TextEditor(QMainWindow):
 	def openFile(self):
 		#  Open selected file
 
-		self.alert_box = QMessageBox.question(self, "Open file", "\nThe current changes will be overwrited. \nMake sure you saved the file.", QMessageBox.Ok | QMessageBox.Cancel)
-		if self.alert_box == QMessageBox.Ok:
-			self.currentStatus.setText("Opening new file")
-			self.pulled_file, _ = QFileDialog.getOpenFileName(self, "Search Your File", ".", "Text Docs (*.txt);All files (*.*)")
-			if self.pulled_file == "":
-				pass
+		if self.currentStatus.text() == "Unsaved":
+			self.alert_box = QMessageBox.question(self, "Open file", "\nYou have unsaved changes. \nDo you want to open a file anyway?.", QMessageBox.Yes | QMessageBox.Cancel)
+			if self.alert_box == QMessageBox.Yes:
+				return self.manageOpenFile()
 			else:
-				try:
-					self.pulled_file_text = open(self.pulled_file).read()
-				except Exception as e:
-					#  Change this to QMessageBox
-					print(str(e))
-				else:
-					self.txt_editor.setPlainText(self.pulled_file_text)
-					self.changeWindowTitle()
+				pass
 		else:
+			return self.manageOpenFile()
+
+	def manageOpenFile(self):
+		self.currentStatus.setText("Opening new file")
+		self.pulled_file, _ = QFileDialog.getOpenFileName(self, "Search Your File", ".", "Text Docs (*.txt);All files (*.*)")
+		if self.pulled_file == "":
 			pass
+		else:
+			try:
+				self.pulled_file_text = open(self.pulled_file).read()
+			except Exception as e:
+				#  Change this to QMessageBox
+				print(str(e))
+			else:
+				self.txt_editor.setPlainText(self.pulled_file_text)
+				self.changeWindowTitle()
 
 	def saveFile(self):
 		#  Save current file
@@ -205,7 +211,7 @@ class TextEditor(QMainWindow):
 		#  Quit with X button
 
 		if self.currentStatus.text() == "Unsaved":
-			self.quitask = QMessageBox.question(self, "Leaving?", "\nYou have unsaved changes. Are you sure you want to quit?", QMessageBox.Yes | QMessageBox.No)
+			self.quitask = QMessageBox.question(self, "Leaving?", "\nYou have unsaved changes. \nAre you sure you want to quit?", QMessageBox.Yes | QMessageBox.No)
 			if self.quitask == QMessageBox.Yes:
 				signal.accept()
 			else:
@@ -218,7 +224,7 @@ class TextEditor(QMainWindow):
 
 		if self.currentStatus.text() == "Unsaved":
 			print("how")
-			self.quitask = QMessageBox.question(self, "Leaving?", "\nYou have unsaved changes. Are you sure you want to quit?", QMessageBox.Yes | QMessageBox.No)
+			self.quitask = QMessageBox.question(self, "Leaving?", "\nYou have unsaved changes. \nAre you sure you want to quit?", QMessageBox.Yes | QMessageBox.No)
 			if self.quitask == QMessageBox.Yes:
 				sys.exit()
 			else:
