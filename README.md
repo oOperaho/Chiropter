@@ -1,3 +1,5 @@
+![Chiropter](https://user-images.githubusercontent.com/61850743/157271340-1972a9bf-f5bf-403f-8b1c-726ab699377d.png)
+
 # Chiropter
 
 This is a very simple text editor, i did it for the sake of learning more about PyQt. I put some basic features that every editor have, like New/Open/Save files and handling edit events (Copy, Paste, Cut, etc).
