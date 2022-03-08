@@ -6,7 +6,7 @@ I'll try after a while to refactor the code and add more styles/languages, and m
 
 Install it:
 
-You'll need [Python](https://www.python.org/downloads/) and PYQt5 installed:
+You'll need [Python](https://www.python.org/downloads/) and PyQt5 installed:
 ```
 pip install PyQt5
 ```

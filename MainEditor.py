@@ -15,6 +15,7 @@ class TextEditor(QMainWindow):
 		super().__init__(parent=parent)
 		self.resize(500, 500)
 		self.setObjectName(objects[0])
+		self.setWindowIcon(QIcon("Icons/Chiropter.png"))
 		self.txt_editor = QPlainTextEdit(self)
 		self.txt_layout = QVBoxLayout(self)
 		self.txt_widget = QWidget(self)
@@ -118,7 +119,7 @@ class TextEditor(QMainWindow):
 
 	def openRepo(self):
 		#  Open repository on Github
-		
+
 		import webbrowser
 
 		self.url = "https://github.com/oOperaho/Chiropter"
