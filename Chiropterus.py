@@ -6,7 +6,7 @@ def display():
 	w = QApplication(sys.argv)
 	w.setApplicationName("Main | Chiropter")
 	TextEditor()
-	BatStyle = open("Styles/BatStyle.qss", "r")
+	BatStyle = open("Chiropter/Styles/BatStyle.qss", "r")
 	with BatStyle:
 		qss = BatStyle.read()
 		w.setStyleSheet(qss)
